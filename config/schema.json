@@ -1,0 +1,167 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "pyRadPlan Dashboard Configuration",
+  "description": "Configuration schema for pyRadPlan dashboard deployment",
+  "type": "object",
+  "required": ["environment", "network", "paths", "database", "jobs"],
+  "properties": {
+    "environment": {
+      "type": "object",
+      "required": ["name", "location"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment identifier (e.g., work, home, lab)"
+        },
+        "location": {
+          "type": "string",
+          "description": "Human-readable description of the environment"
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "required": ["backend_host", "backend_port", "frontend_host", "frontend_port", "base_url"],
+      "properties": {
+        "backend_host": {
+          "type": "string",
+          "description": "Backend bind address (0.0.0.0 for all interfaces)"
+        },
+        "backend_port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Backend API port"
+        },
+        "frontend_host": {
+          "type": "string",
+          "description": "Frontend bind address"
+        },
+        "frontend_port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Frontend development server port"
+        },
+        "base_url": {
+          "type": "string",
+          "pattern": "^https?://",
+          "description": "Base URL for accessing the dashboard (e.g., http://192.168.1.100)"
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "required": ["patient_data", "results", "temp", "machines"],
+      "properties": {
+        "patient_data": {
+          "type": "string",
+          "description": "Directory for patient data storage"
+        },
+        "results": {
+          "type": "string",
+          "description": "Directory for optimization results"
+        },
+        "temp": {
+          "type": "string",
+          "description": "Temporary file storage"
+        },
+        "machines": {
+          "type": "string",
+          "description": "Path to machine configuration files"
+        }
+      }
+    },
+    "database": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["sqlite", "postgresql"],
+          "description": "Database backend type"
+        },
+        "path": {
+          "type": "string",
+          "description": "SQLite database file path (required if type is sqlite)"
+        },
+        "host": {
+          "type": "string",
+          "description": "PostgreSQL host (required if type is postgresql)"
+        },
+        "port": {
+          "type": "integer",
+          "description": "PostgreSQL port (required if type is postgresql)"
+        },
+        "database": {
+          "type": "string",
+          "description": "PostgreSQL database name (required if type is postgresql)"
+        },
+        "user": {
+          "type": "string",
+          "description": "PostgreSQL user (required if type is postgresql)"
+        },
+        "password_env": {
+          "type": "string",
+          "description": "Environment variable containing database password"
+        }
+      }
+    },
+    "jobs": {
+      "type": "object",
+      "required": ["queue"],
+      "properties": {
+        "queue": {
+          "type": "string",
+          "enum": ["redis", "memory"],
+          "description": "Job queue backend (redis recommended for production)"
+        },
+        "redis_url": {
+          "type": "string",
+          "description": "Redis connection URL (required if queue is redis)"
+        },
+        "max_workers": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16,
+          "description": "Maximum number of background worker processes"
+        }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable JWT authentication"
+        },
+        "jwt_secret_env": {
+          "type": "string",
+          "description": "Environment variable containing JWT secret key"
+        },
+        "token_expire_hours": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "JWT token expiration time in hours"
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "dicom_import": {
+          "type": "boolean",
+          "description": "Enable DICOM import functionality"
+        },
+        "matlab_export": {
+          "type": "boolean",
+          "description": "Enable MATLAB .mat file export"
+        },
+        "realtime_updates": {
+          "type": "boolean",
+          "description": "Enable WebSocket real-time progress updates"
+        }
+      }
+    }
+  }
+}

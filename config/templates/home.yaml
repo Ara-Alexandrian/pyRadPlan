@@ -1,0 +1,36 @@
+# Home Environment Configuration Template
+# Edit this template or run the wizard to customize for your home setup
+
+environment:
+  name: "home"
+  location: "Unraid Home Server"
+
+network:
+  backend_host: "0.0.0.0"
+  backend_port: 8000
+  frontend_host: "0.0.0.0"
+  frontend_port: 5173
+  base_url: "http://192.168.0.50"  # Replace with your home server IP
+
+paths:
+  patient_data: "/mnt/user/appdata/pyradplan/patients"
+  results: "/mnt/user/appdata/pyradplan/results"
+  temp: "/tmp/pyradplan"
+  machines: "${REPO_ROOT}/pyRadPlan/data/machines"
+
+database:
+  type: "sqlite"
+  path: "/mnt/user/appdata/pyradplan/pyradplan_home.db"
+
+jobs:
+  queue: "redis"
+  redis_url: "redis://localhost:6379/0"
+  max_workers: 2  # Fewer workers for home setup
+
+auth:
+  enabled: false
+
+features:
+  dicom_import: true
+  matlab_export: true
+  realtime_updates: true

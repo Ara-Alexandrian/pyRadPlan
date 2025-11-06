@@ -163,9 +163,25 @@ cython_debug/
 
 .vscode/
 
+# pyRadPlan Dashboard Configuration
+config/active.yaml
+config/*.yaml
+!config/templates/*.yaml
+*.db
+*.sqlite
+*.sqlite3
 
+# Dashboard data and uploads
+/data/
+/storage/
+/uploads/
 
-
+# Frontend build artifacts
+frontend/node_modules/
+frontend/.svelte-kit/
+frontend/build/
+frontend/.env
+frontend/.env.local
 
 *.pyc
 ./matRad

@@ -60,6 +60,21 @@ matlab = ["matlabengine"]
 octave = ["oct2py"]
 gui    = ["PyQt5"]
 
+dashboard = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "pyyaml>=6.0",
+    "questionary>=2.0.0",
+    "redis>=5.0.0",
+    "rq>=1.15.0",
+    "websockets>=12.0",
+    "python-multipart>=0.0.6",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "aiofiles>=23.0.0",
+    "pillow>=10.0.0",
+]
+
 dev = ["pytest","coverage","pytest-cov","pre-commit","sphinx","numpydoc","pydata-sphinx-theme","sphinx-design","autodoc_pydantic","sphinx-autodoc-typehints"]
 
 [project.urls]

@@ -1,0 +1,38 @@
+# Default pyRadPlan Dashboard Configuration
+# This is a template - run the wizard to create your custom config
+
+environment:
+  name: "default"
+  location: "Development Server"
+
+network:
+  backend_host: "0.0.0.0"
+  backend_port: 8000
+  frontend_host: "0.0.0.0"
+  frontend_port: 5173
+  base_url: "http://localhost"
+
+paths:
+  patient_data: "/config/workspace/data/patients"
+  results: "/config/workspace/data/results"
+  temp: "/tmp/pyradplan"
+  machines: "${REPO_ROOT}/pyRadPlan/data/machines"
+
+database:
+  type: "sqlite"
+  path: "/config/workspace/data/pyradplan.db"
+
+jobs:
+  queue: "redis"
+  redis_url: "redis://localhost:6379/0"
+  max_workers: 4
+
+auth:
+  enabled: false
+  jwt_secret_env: "JWT_SECRET"
+  token_expire_hours: 24
+
+features:
+  dicom_import: true
+  matlab_export: true
+  realtime_updates: true

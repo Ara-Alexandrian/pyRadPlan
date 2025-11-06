@@ -1,0 +1,36 @@
+# Work Environment Configuration Template
+# Edit this template or run the wizard to customize for your work setup
+
+environment:
+  name: "work"
+  location: "Unraid Work Server"
+
+network:
+  backend_host: "0.0.0.0"
+  backend_port: 8000
+  frontend_host: "0.0.0.0"
+  frontend_port: 5173
+  base_url: "http://192.168.1.100"  # Replace with your work server IP
+
+paths:
+  patient_data: "/config/workspace/data/patients"
+  results: "/config/workspace/data/results"
+  temp: "/tmp/pyradplan"
+  machines: "${REPO_ROOT}/pyRadPlan/data/machines"
+
+database:
+  type: "sqlite"
+  path: "/config/workspace/data/pyradplan_work.db"
+
+jobs:
+  queue: "redis"
+  redis_url: "redis://localhost:6379/0"
+  max_workers: 4
+
+auth:
+  enabled: false
+
+features:
+  dicom_import: true
+  matlab_export: true
+  realtime_updates: true
